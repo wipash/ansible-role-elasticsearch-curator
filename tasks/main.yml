@@ -12,7 +12,7 @@
 - name: Install elasticsearch-curator
   pip:
     name: elasticsearch-curator
-    version: 3.5.1
+    version: "{{ elasticsearch_curator_version }}"
 
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:

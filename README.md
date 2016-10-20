@@ -14,6 +14,9 @@ On RedHat/CentOS, make sure you have the EPEL repository configured, so the `pyt
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+    ## elasticsearch-curator > 4.x doesn't work with this role
+    elasticsearch_curator_version: 3.5.1
+
     elasticsearch_curator_cron_jobs:
       - {
         name: "Delete old elasticsearch indices.",
