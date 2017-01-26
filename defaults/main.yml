@@ -1,20 +1,18 @@
 ---
-## elasticsearch-curator > 4.x doesn't work with this role
-elasticsearch_curator_version: 3.5.1
+elasticsearch_curator_version: 4.2.5
 
-elasticsearch_curator_cron_jobs: []
+elasticsearch_curator_hosts: 127.0.0.1
+elasticsearch_curator_port: 9200
+elasticsearch_curator_master_only: False
 
-## Add cron entries like such as:
-# elasticsearch_curator_cron_jobs:
-#   - {
-#     name: "Delete old elasticsearch indices.",
-#     job: "/usr/local/bin/curator delete indices --older-than 30 --time-unit days --timestring '\\%Y.\\%m.\\%d'",
-#     minute: 0,
-#     hour: 1
-#   }
-#   - {
-#     name: "Close old elasticsearch indices.",
-#     job: "/usr/local/bin/curator close indices --older-than 14 --time-unit days --timestring '\\%Y.\\%m.\\%d'",
-#     minute: 30,
-#     hour: 1
-#   }
+elasticsearch_curator_days_to_close: 94
+elasticsearch_curator_days_to_delete: 94
+
+
+elasticsearch_curator_cron_jobs:
+  - {
+    name: "elasticsearch_curator",
+    job: "/usr/local/bin/curator --config /etc/curator/config.yml /etc/curator/actions.yml",
+    minute: 5,
+    hour: 0
+  }

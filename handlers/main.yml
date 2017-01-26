@@ -1,0 +1,3 @@
+---
+- name: Run elasticsearch-curator
+  shell: /usr/local/bin/curator --config /etc/curator/config.yml /etc/curator/actions.yml
