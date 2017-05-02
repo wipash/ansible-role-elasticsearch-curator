@@ -1,5 +1,5 @@
 ---
-elasticsearch_curator_version: 4.2.5
+elasticsearch_curator_version: 5.0.1
 
 elasticsearch_curator_hosts: 127.0.0.1
 elasticsearch_curator_port: 9200
