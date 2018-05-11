@@ -15,7 +15,7 @@ actions:
     filters:
     - filtertype: pattern
       kind: prefix
-      value: logstash-
+      value: logstash-*-
       exclude:
     - filtertype: age
       source: name
@@ -75,7 +75,7 @@ actions:
       filters:
       - filtertype: pattern
         kind: prefix
-        value: logstash-
+        value: logstash-*-
       - filtertype: age
         source: name
         direction: older
@@ -98,7 +98,7 @@ actions:
       filters:
       - filtertype: pattern
         kind: prefix
-        value: logstash-
+        value: logstash-*-
         exclude:
       - filtertype: age
         source: name
@@ -111,7 +111,7 @@ actions:
       filters:
       - filtertype: pattern
         kind: prefix
-        value: logstash-
+        value: logstash-*-
       - filtertype: age
         source: name
         direction: older
