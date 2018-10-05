@@ -20,7 +20,7 @@ elasticsearch_curator_http_auth:
 elasticsearch_curator_cron_jobs:
   - {
     name: "elasticsearch_curator",
-    job: "/usr/local/bin/curator --config /etc/curator/config.yml /etc/curator/actions.yml",
+    job: "curator --config /etc/curator/config.yml /etc/curator/actions.yml",
     minute: 5,
     hour: 0
   }
