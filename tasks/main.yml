@@ -37,7 +37,7 @@
 - name: Set cron path
   cron:
     name: PATH
-    env: yes
+    env: true
     value: /usr/local/bin:/usr/bin:/sbin:/bin:/usr/sbin
     user: "{{ ansible_user_id }}"
     cron_file: ansible_logstash-curator
