@@ -1,5 +1,7 @@
 ---
-- hosts: all
+- name: Converge
+  hosts: all
+  become: true
 
   pre_tasks:
     - name: Install cron (RedHat).
@@ -11,4 +13,4 @@
       when: ansible_distribution == 'Ubuntu'
 
   roles:
-    - role_under_test
+    - role: geerlingguy.elasticsearch-curator
