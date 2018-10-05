@@ -1,5 +1,5 @@
 ---
 - name: Run elasticsearch-curator
-  environment: 
+  environment:
     PATH: /usr/local/bin:/usr/bin:/sbin:/bin:/usr/sbin:{{ ansible_env.PATH }}
   command: curator --config /etc/curator/config.yml /etc/curator/actions.yml

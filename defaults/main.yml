@@ -3,18 +3,18 @@ elasticsearch_curator_version: 5.4.1
 
 elasticsearch_curator_hosts: 127.0.0.1
 elasticsearch_curator_port: 9200
-elasticsearch_curator_master_only: False
-elasticsearch_curator_ssl: False
+elasticsearch_curator_master_only: false
+elasticsearch_curator_ssl: false
 elasticsearch_curator_url_prefix:
 elasticsearch_curator_certificate:
 elasticsearch_curator_client_cert:
 elasticsearch_curator_client_key:
-elasticsearch_curator_ssl_no_validate: False
+elasticsearch_curator_ssl_no_validate: false
 elasticsearch_curator_timeout: 30
 elasticsearch_curator_aws_key:
 elasticsearch_curator_aws_secret_key:
 elasticsearch_curator_aws_region:
-elasticsearch_curator_aws_sign_request: False
+elasticsearch_curator_aws_sign_request: false
 elasticsearch_curator_http_auth:
 
 elasticsearch_curator_cron_jobs:
