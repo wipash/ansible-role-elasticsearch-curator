@@ -2,14 +2,14 @@
 client:
   hosts: {{ elasticsearch_curator_hosts }}
   port: {{ elasticsearch_curator_port }}
-  url_prefix:
-  use_ssl: False
-  certificate:
-  client_cert:
-  client_key:
-  ssl_no_validate: False
-  http_auth:
-  timeout: 30
+  url_prefix: {{ elasticsearch_curator_url_prefix }}
+  use_ssl: {{ elasticsearch_curator_ssl }}
+  certificate: {{ elasticsearch_curator_certificate }}
+  client_cert: {{ elasticsearch_curator_client_cert }}
+  client_key: {{ elasticsearch_curator_client_key }}
+  ssl_no_validate: {{ elasticsearch_curator_ssl_no_validate }}
+  http_auth: {{ elasticsearch_curator_http_auth }}
+  timeout: {{ elasticsearch_curator_timeout }}
   master_only: {{ elasticsearch_curator_master_only }}
 
 logging:

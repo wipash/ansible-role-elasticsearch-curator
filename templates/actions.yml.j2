@@ -1,9 +1,12 @@
 ---
 actions:
-  0:
+{% for prefix in elasticsearch_curator_prefixes %}
+{% set second_action_number = loop.index * 2 %}
+{% set first_action_number = second_action_number - 1 %}
+  {{ first_action_number }}:
     action: delete_indices
     description: >-
-      Delete indices older than {{ elasticsearch_curator_days_to_delete }} days
+      Delete indices older than {{ prefix.days_to_delete }} days
       (based on index name), for logstash-prefixed indices.
       Ignore the error if the filter does not result in an
       actionable list of indices (ignore_empty_list) and exit cleanly.
@@ -15,19 +18,19 @@ actions:
     filters:
     - filtertype: pattern
       kind: prefix
-      value: logstash-*-
+      value: {{ prefix.prefix }}
       exclude:
     - filtertype: age
       source: name
       direction: older
       timestring: '%Y.%m.%d'
       unit: days
-      unit_count: {{ elasticsearch_curator_days_to_delete }}
+      unit_count: {{ prefix.days_to_delete }}
       exclude:
-  1:
+  {{ second_action_number }}:
     action: close
     description: >-
-      Close indices older than {{ elasticsearch_curator_days_to_close }} days
+      Close indices older than {{ prefix.days_to_close }} days
       (based on index name), for logstash-prefixed indices.
     options:
       delete_aliases: False
@@ -38,84 +41,13 @@ actions:
     filters:
     - filtertype: pattern
       kind: prefix
-      value: logstash-
+      value: {{ prefix.prefix }}
       exclude:
     - filtertype: age
       source: name
       direction: older
       timestring: '%Y.%m.%d'
       unit: days
-      unit_count: {{ elasticsearch_curator_days_to_close }}
+      unit_count: {{ prefix.days_to_close }}
       exclude:
-  2:
-    action: alias
-    description: >-
-      Update logstash-today alias indices
-    options:
-      name: logstash-today
-      extra_settings:
-      timeout_override:
-      continue_if_exception: True
-      ignore_empty_list: True
-      disable_action: False
-    add:
-      filters:
-      - filtertype: pattern
-        kind: prefix
-        value: logstash-
-        exclude:
-      - filtertype: age
-        source: name
-        direction: younger
-        timestring: '%Y.%m.%d'
-        unit: days
-        unit_count: 1
-        exclude:
-    remove:
-      filters:
-      - filtertype: pattern
-        kind: prefix
-        value: logstash-*-
-      - filtertype: age
-        source: name
-        direction: older
-        timestring: '%Y.%m.%d'
-        unit: days
-        unit_count: 1
-        exclude:
-  3:
-    action: alias
-    description: >-
-      Update logstash-twoday alias indices
-    options:
-      name: logstash-twoday
-      extra_settings:
-      timeout_override:
-      continue_if_exception: True
-      ignore_empty_list: True
-      disable_action: False
-    add:
-      filters:
-      - filtertype: pattern
-        kind: prefix
-        value: logstash-*-
-        exclude:
-      - filtertype: age
-        source: name
-        direction: younger
-        timestring: '%Y.%m.%d'
-        unit: days
-        unit_count: 2
-        exclude:
-    remove:
-      filters:
-      - filtertype: pattern
-        kind: prefix
-        value: logstash-*-
-      - filtertype: age
-        source: name
-        direction: older
-        timestring: '%Y.%m.%d'
-        unit: days
-        unit_count: 2
-        exclude:
+{% endfor %}
