@@ -1,6 +1,6 @@
 ---
 actions:
-{% for prefix in {{ elasticsearch_curator_prefixes }} %}
+{% for prefix in elasticsearch_curator_prefixes %}
 {% set second_action_number = loop.index * 2 %}
 {% set first_action_number = second_action_number - 1 %}
   {{ first_action_number }}:
@@ -30,7 +30,7 @@ actions:
   {{ second_action_number }}:
     action: close
     description: >-
-      Close indices older than {{ elasticsearch_curator_days_to_close }} days
+      Close indices older than {{ prefix.days_to_close }} days
       (based on index name), for logstash-prefixed indices.
     options:
       delete_aliases: False
