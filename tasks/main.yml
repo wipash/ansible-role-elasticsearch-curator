@@ -34,6 +34,14 @@
     - actions.yml
   notify: Run elasticsearch-curator
 
+- name: Set cron path
+  cron:
+    name: PATH
+    env: yes
+    value: /usr/local/bin:/usr/bin
+    user: {{ ansible_user_id }}
+    cron_file: ansible_logstash-curator
+
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
     name: "{{ item.name }}"
@@ -43,4 +51,6 @@
     day: "{{ item.day | default('*') }}"
     weekday: "{{ item.weekday | default('*') }}"
     month: "{{ item.month | default('*') }}"
+    user: {{ ansible_user_id }}
+    cron_file: ansible_logstash-curator
   with_items: "{{ elasticsearch_curator_cron_jobs }}"
