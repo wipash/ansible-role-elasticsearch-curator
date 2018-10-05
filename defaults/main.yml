@@ -4,10 +4,10 @@ elasticsearch_curator_version: 5.0.1
 elasticsearch_curator_hosts: 127.0.0.1
 elasticsearch_curator_port: 9200
 elasticsearch_curator_master_only: False
-
-elasticsearch_curator_days_to_close: 94
-elasticsearch_curator_days_to_delete: 94
-
+elasticsearch_curator_ssl: False
+elasticsearch_curator_url_prefix:
+elasticsearch_curator_certificate:
+elasticsearch_curator_client_cert:
 
 elasticsearch_curator_cron_jobs:
   - {
@@ -15,4 +15,11 @@ elasticsearch_curator_cron_jobs:
     job: "/usr/local/bin/curator --config /etc/curator/config.yml /etc/curator/actions.yml",
     minute: 5,
     hour: 0
+  }
+
+elasticsearch_curator_prefixes:
+  - {
+    prefix: "logstash-",
+    days_to_delete: 90,
+    days_to_close: 90
   }
